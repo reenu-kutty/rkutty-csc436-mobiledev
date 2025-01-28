@@ -29,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zybooks.pizzaparty.ui.theme.PizzaPartyTheme
-import kotlin.math.ceil
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,9 +108,35 @@ fun RadioGroup(
     labelText: String,
     radioOptions: List<String>,
     selectedValue: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    // Not implemented yet
+    var selectedOption by remember { mutableStateOf(selectedValue) }
+    val isSelectedOption: (String) -> Boolean = { selectedOption == it }
+
+    Column {
+        Text(labelText)
+        radioOptions.forEach { option ->
+            Row(
+                modifier = modifier
+                    .selectable(
+                        selected = isSelectedOption(option),
+                        onClick = { selectedOption = option },
+                        role = Role.RadioButton
+                    )
+                    .padding(8.dp)
+            ) {
+                RadioButton(
+                    selected = isSelectedOption(option),
+                    onClick = null,
+                    modifier = modifier.padding(end = 8.dp)
+                )
+                Text(
+                    text = option,
+                    modifier = modifier.fillMaxWidth()
+                )
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)
