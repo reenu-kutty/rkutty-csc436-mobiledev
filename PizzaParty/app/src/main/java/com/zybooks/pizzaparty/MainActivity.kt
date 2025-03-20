@@ -3,11 +3,15 @@ package com.zybooks.pizzaparty
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -22,7 +26,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,6 +52,35 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Preview
+@Composable
+fun Tester(modifier: Modifier = Modifier) {
+    LazyColumn (
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        items(3) { index ->
+            Text(
+                text = "Blue ${index + 1}",
+                color = Color.White,
+                modifier = Modifier
+                    .height(100.dp)
+                    .width(200.dp)
+                    .background(Color.Blue)
+            )
+            Text(
+                text = "Yellow ${index + 1}",
+                color = Color.Black,
+                modifier = Modifier
+                    .height(100.dp)
+                    .width(200.dp)
+                    .background(Color.Yellow)
+            )
+        }}
+}
+
+
+
 
 @Composable
 fun PizzaPartyScreen(modifier: Modifier = Modifier) {
